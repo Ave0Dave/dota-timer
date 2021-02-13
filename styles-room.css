@@ -1,0 +1,39 @@
+html, body {
+    margin: 0;
+    background-color: pink;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: pink;
+}
+
+.column {
+    flex: 20%;
+    max-width: 20%;
+}
+
+.column img {
+    vertical-align: middle;
+    width: 100%;
+    transition:  ease-in-out 0.2s;
+}
+
+.column img:hover {
+    opacity: 80%;
+}
+
+@media screen and (max-width: 1000px) {
+    .column {
+        flex: 25%;
+        max-width: 25%;
+    }
+  }
+  
+@media screen and (max-width: 800px) {
+    .column {
+      flex: 50%;
+      max-width: 50%;
+    }
+  }

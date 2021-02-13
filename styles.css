@@ -10,57 +10,86 @@
 
 * {
     font-family: Trajan;
-    text-align: center;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-html, body {
-    height: 100%;
-    overflow: hidden;
+html {
+    --text-color-normal: #000000;
+    --text-color-time: #ff2424;
+    --background: #ff9595;
+    --background-time: rgb(37, 0, 0);
+    background-color: var(--background);
+}
+  
+html[data-theme="green"] {
+    --text-color-normal: #000000;
+    --text-color-time: #62ff53;
+    --background-time: rgb(1, 24, 0);
+    --background: #a6ffbc;
+    background-color: var(--background);
 }
 
 main {
     display: flex;
-    height: 100%;
     flex-flow: column;
-    align-items: stretch;
+    align-items: center;
+    
+    padding: 1em;
+
+    height: 100vh;
 }
 
 .heading {
-    font-size: 70px;
+    font-size: 5em;
+    text-align: center;
 }
 
 #container-time {
-    display: flex; 
-    justify-content: center; 
-    align-items: center;
-    margin: auto;
-    width: 70%;
-    height: 18%; 
+    position: relative;
+    
+    display: inline-block; 
+    
+    padding: 0.8em 10em;
 
-    background-color: rgb(36, 0, 0);
-    border: 7px solid black;
-    border-radius: 2%;
+    margin-top: 2em;
+
+    background-color: var(--background-time);
+    border: 10px solid black;
+    border-radius: 5px;
+
+    z-index: 0;
 }
 
 #time {
-    padding-right: 30px;
-
+    text-align: center;
     font-family: Digital;
     font-size: 80px;
-    text-shadow: 0 0 2px #ff3d3d, 0 0 2px #ff3d3d, 0 0 2px #ff3d3d, 0 0 2px #ff3d3d;
+    text-shadow: 0 0 2px var(--text-color-time), 0 0 2px var(--text-color-time), 0 0 2px var(--text-color-time), 0 0 2px var(--text-color-time);
 
-    color: red;
+    color: var(--text-color-time);
+    z-index: 1;
 }
 
-.container-answer {
-    margin: auto;
+#time::after {
+    content: "88:88:88";
+    
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    color: var(--text-color-time);
+    opacity: 0.2;
+    text-shadow: 0 0 2px var(--text-color-time), 0 0 2px var(--text-color-time), 0 0 2px var(--text-color-time), 0 0 2px var(--text-color-time);
+    
+    z-index: -1;
 }
 
 #answer {
-    margin: auto;
-
     font-weight: bold;
-    font-size: 200px;
+    font-size: 12em;
     animation: shake 0.3s;
 
     animation-iteration-count: infinite;
@@ -80,38 +109,21 @@ main {
     100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
 
-#img1 {
+.container-image > img {
     display: none;
-    height: 250px;
-    width: 250px;
-    margin: auto;
-}
-
-#img2 {
-    display: none;
-    height: 240px;
-    width: 320px;
-    margin: auto;
+    height: 190px;
+    width: auto;
 }
 
 #mute-button {
     position: fixed;
-    top: 5px;
-    left: 5px;
+    top: 1em;
+    left: 1em;
     
     width: 100px;
     height: 100px;
 
     opacity: 20%;
-}
-
-#red-button {
-    position: fixed;
-    top: 5px;
-    right: 10px;
-    
-    width: 100px;
-    height: 100px;
 }
 
 #video {
@@ -123,15 +135,86 @@ main {
     min-height: 100%;    
 }
 
-.container-time-travel {
+.container-buttons {
     position: fixed;
-    top: 5px;
-    right: 8px;
-    height: 120px;
-
+    top: 1em;
+    right: 1em;
+    height: 250px;
+    
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
+}
 
+.button {
+    position: relative;
+    width: auto;
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    border: solid 1px #e441a5;
+    background:  #f01c9e;
+    text-align: center;
+    padding: 16px 18px 14px;
+    margin: 12px;
+
+    -webkit-transition: all 0.1s;
+    -moz-transition: all 0.1s;
+    transition: all 0.1s;
+        
+    -webkit-box-shadow: 0px 6px 0px #af0089;
+    -moz-box-shadow: 0px 6px 0px #af0089;
+    box-shadow: 0px 6px 0px #af0089;
+}
+  
+.button:hover {
+    background:  #ff29ad; 
+    box-shadow: 0px 6px 0px #c20298;
+}
+
+.button:active {
+    -webkit-box-shadow: 0px 2px 0px #af0089;
+    -moz-box-shadow: 0px 2px 0px #af0089;
+    box-shadow: 0px 2px 0px #af0089;
+    position: relative;
+    top: 4px;
+}
+
+@media only screen and (max-width: 500px) {
+    html {
+        overflow: hidden;
+    }
+
+    .heading {
+        font-size: 3.5em;
+    }
+
+    #container-time {
+        padding: 0.8em 2em;
+    }
+
+    #answer {
+        font-size: 8em;
+        margin-top: 0.2em;
+    }
+
+    img {
+        height: 150px;
+    }
+    
+    #mute-button {
+        display: none;
+    }
+
+    .container-buttons {
+        display: none;
+    }
+
+    .container-buttons > * {
+        display: none;
+    }
+
+    .button {
+        display: none;
+    }
 }
